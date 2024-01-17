@@ -1,0 +1,22 @@
+.institution-container {
+    font-family: 'Arial', sans-serif;
+    color: #1E90FF; /* Ocean Blue */
+}
+
+.institution-header {
+background-color: #32CD32; /* Grass Green */
+color: white;
+padding: 10px;
+text-align: center;
+}
+
+.activity-posting, .activity-management, .analytics-overview {
+margin: 20px;
+padding: 20px;
+border: 2px solid #F4A460; /* Sandy Beige */
+border-radius: 5px;
+}
+
+h1, h2 {
+color: #1E90FF; /* Ocean Blue */
+}

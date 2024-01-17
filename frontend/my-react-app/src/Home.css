@@ -1,0 +1,35 @@
+.home-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.home-header h1 {
+color: #1E90FF; /* Ocean Blue */
+}
+
+.home-header p {
+color: #32CD32; /* Grass Green */
+}
+
+.home-content {
+margin: 20px 0;
+color: #333;
+}
+
+.home-actions {
+margin-top: 30px;
+}
+
+.home-link {
+margin: 0 10px;
+padding: 10px 15px;
+background-color: #F4A460; /* Sandy Beige */
+color: white;
+text-decoration: none;
+border-radius: 5px;
+transition: background-color 0.3s;
+}
+
+.home-link:hover {
+background-color: #1E90FF; /* Ocean Blue */
+}
