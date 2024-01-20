@@ -1,0 +1,67 @@
+/* NavBar.css */
+
+.navbar {
+    background-color: #1E90FF; /* Ocean Blue */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.navbar-brand {
+font-size: 1.5em;
+font-weight: bold;
+}
+
+.nav-links {
+list-style: none;
+display: flex;
+}
+
+.nav-item {
+margin-left: 20px;
+text-decoration: none;
+color: white;
+transition: color 0.3s ease;
+}
+
+.nav-item:hover {
+color: #F4A460; /* Sandy Beige */
+}
+
+.nav-toggle {
+display: none;
+cursor: pointer;
+}
+
+.bar {
+display: block;
+width: 25px;
+height: 3px;
+margin: 5px auto;
+background-color: white;
+transition: all 0.3s ease;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+.nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+}
+
+.nav-links.nav-active {
+    display: flex;
+}
+
+.nav-item {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.nav-toggle {
+    display: block;
+}
+}

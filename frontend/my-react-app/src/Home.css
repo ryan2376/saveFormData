@@ -1,35 +1,86 @@
 .home-container {
-    text-align: center;
-    padding: 20px;
+    font-family: 'Arial', sans-serif;
 }
 
-.home-header h1 {
+.hero-section {
+background: url('C:\xampp\htdocs\saveFormData\frontend\my-react-app\src\images\imat-bagja-gumilar-jwTvCQQJXh0-unsplash.jpg') no-repeat center center/cover;
+text-align: center;
+padding: 300px 20px;
 color: #1E90FF; /* Ocean Blue */
 }
 
-.home-header p {
-color: #32CD32; /* Grass Green */
+.hero-section h1 {
+font-size: 2.5em;
+margin-bottom: 10px;
 }
 
-.home-content {
-margin: 20px 0;
-color: #333;
+.hero-section p {
+font-size: 1.2em;
+margin-bottom: 20px;
 }
 
-.home-actions {
-margin-top: 30px;
-}
-
-.home-link {
-margin: 0 10px;
-padding: 10px 15px;
-background-color: #F4A460; /* Sandy Beige */
+.cta-button {
+background-color: #32CD32; /* Grass Green */
 color: white;
-text-decoration: none;
+border: none;
+padding: 10px 20px;
+cursor: pointer;
 border-radius: 5px;
-transition: background-color 0.3s;
+font-size: 1em;
+transition: background-color 0.3s ease;
 }
 
-.home-link:hover {
-background-color: #1E90FF; /* Ocean Blue */
+.cta-button:hover {
+background-color: #F4A460; /* Sandy Beige */
+}
+
+.features-section {
+display: flex;
+justify-content: space-around;
+padding: 20px;
+background-color: #f0f0f0; /* Light background for contrast */
+}
+
+.feature{
+width: 30%;
+height: 500px;
+text-align: center;
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+border-radius: 10px;
+overflow: hidden;
+}
+
+.feature h2{
+color: #1E90FF; /* Ocean Blue */
+}
+
+.feature h2 .feature p{
+    color: white;
+}
+
+/* Additional styles for individual features */
+.feature:nth-child(1) {
+    background-image: url('C:\xampp\htdocs\saveFormData\frontend\my-react-app\src\images\david-bruyndonckx-F_hft1Wiyj8-unsplash.jpg');
+}
+
+.feature:nth-child(2) {
+background-image: url('C:\xampp\htdocs\saveFormData\frontend\my-react-app\src\images\imat-bagja-gumilar-jwTvCQQJXh0-unsplash.jpg');
+}
+
+.feature:nth-child(3) {
+background-image: url('C:\xampp\htdocs\saveFormData\frontend\my-react-app\src\images\miha-rekar-gzMvo6cR6J0-unsplash.jpg');
+}
+
+@media (max-width: 768px) {
+.features-section {
+    flex-direction: column;
+    align-items: center;
+}
+
+.feature {
+    width: 80%;
+    margin-bottom: 20px;
+}
 }
