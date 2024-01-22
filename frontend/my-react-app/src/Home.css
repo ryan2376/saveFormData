@@ -3,7 +3,7 @@
 }
 
 .hero-section {
-background: url('C:\xampp\htdocs\saveFormData\frontend\my-react-app\src\images\imat-bagja-gumilar-jwTvCQQJXh0-unsplash.jpg') no-repeat center center/cover;
+background: url('C:\xampp\htdocs\saveFormData\frontend\my-react-app\src\images\imat-bagja-gumilar-jwTvCQQJXh0-unsplash.jpg') no-repeat center center/cover padding 5px;
 text-align: center;
 padding: 300px 20px;
 color: #1E90FF; /* Ocean Blue */
