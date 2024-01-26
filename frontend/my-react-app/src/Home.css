@@ -1,76 +1,46 @@
 .home-container {
     font-family: 'Arial', sans-serif;
+    background-color: #F5F5F5; /* Off-White */
 }
 
 .hero-section {
-background: url('C:\xampp\htdocs\saveFormData\frontend\my-react-app\src\images\imat-bagja-gumilar-jwTvCQQJXh0-unsplash.jpg') no-repeat center center/cover padding 5px;
+background-color: #008080; /* Teal */
+color: white;
+padding: 50px 20px;
 text-align: center;
-padding: 300px 20px;
-color: #1E90FF; /* Ocean Blue */
-}
-
-.hero-section h1 {
-font-size: 2.5em;
-margin-bottom: 10px;
-}
-
-.hero-section p {
-font-size: 1.2em;
-margin-bottom: 20px;
 }
 
 .cta-button {
-background-color: #32CD32; /* Grass Green */
+background-color: #FF7F50; /* Coral */
 color: white;
 border: none;
 padding: 10px 20px;
-cursor: pointer;
 border-radius: 5px;
-font-size: 1em;
-transition: background-color 0.3s ease;
+cursor: pointer;
+transition: background-color 0.3s;
 }
 
 .cta-button:hover {
-background-color: #F4A460; /* Sandy Beige */
+background-color: darken(#FF7F50, 10%);
 }
 
 .features-section {
 display: flex;
 justify-content: space-around;
 padding: 20px;
-background-color: #f0f0f0; /* Light background for contrast */
 }
 
-.feature{
+.feature {
+background-color: #F5F5F5; /* Light background for contrast */
+padding: 20px;
+border-radius: 5px;
+box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 width: 30%;
-height: 500px;
 text-align: center;
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
-border-radius: 10px;
-overflow: hidden;
 }
 
-.feature h2{
-color: #1E90FF; /* Ocean Blue */
-}
-
-.feature h2 .feature p{
-    color: white;
-}
-
-/* Additional styles for individual features */
-.feature:nth-child(1) {
-    background-image: url('C:\xampp\htdocs\saveFormData\frontend\my-react-app\src\images\david-bruyndonckx-F_hft1Wiyj8-unsplash.jpg');
-}
-
-.feature:nth-child(2) {
-background-image: url('C:\xampp\htdocs\saveFormData\frontend\my-react-app\src\images\imat-bagja-gumilar-jwTvCQQJXh0-unsplash.jpg');
-}
-
-.feature:nth-child(3) {
-background-image: url('C:\xampp\htdocs\saveFormData\frontend\my-react-app\src\images\miha-rekar-gzMvo6cR6J0-unsplash.jpg');
+.feature h2 {
+color: #008080; /* Teal */
 }
 
 @media (max-width: 768px) {

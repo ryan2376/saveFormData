@@ -38,9 +38,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Validate data if needed
 
-    // Insert data into the database, including username and password
+    // Hash the password
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    // Insert data into the database, including username and hashed password
     $sql = "INSERT INTO institutions (name, location, activities, contact_person, contact_email, contact_phone, username, password) 
-            VALUES ('$name', '$location', '$activities', '$contactPerson', '$contactEmail', '$contactPhone', '$username', '$password')";
+            VALUES ('$name', '$location', '$activities', '$contactPerson', '$contactEmail', '$contactPhone', '$username', '$hashedPassword')";
 
     if ($conn->query($sql) === TRUE) {
         echo "Institution data added successfully";

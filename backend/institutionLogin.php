@@ -1,4 +1,14 @@
 <?php
+
+// Handle CORS preflight request
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    header('Access-Control-Allow-Origin: *'); // Adjust this depending on your security requirements
+    header('Access-Control-Allow-Methods: POST, OPTIONS');
+    header('Access-Control-Allow-Headers: Content-Type');
+    http_response_code(200);
+    exit;
+}
+
 // Handle CORS
 header("Access-Control-Allow-Origin: *"); // Adjust this depending on your security requirements
 header("Access-Control-Allow-Headers: Content-Type");
@@ -29,8 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = $loginDetails["username"];
     $password = $loginDetails["password"];
 
-    // Validate data if needed
-
     // Perform login validation and verification against the database using prepared statements
     $stmt = $conn->prepare("SELECT * FROM institutions WHERE username = ?");
     $stmt->bind_param("s", $username);
@@ -46,18 +54,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Verify the password
         if (password_verify($password, $hashedPassword)) {
             // Login successful
+            http_response_code(200);
             echo "Login successful";
         } else {
             // Incorrect password
+            http_response_code(401);
             echo "Login failed: Incorrect password";
         }
     } else {
         // Username not found
+        http_response_code(401);
         echo "Login failed: Username not found";
     }
 } else {
+    http_response_code(400);
     echo "Invalid request method";
 }
 
+// Close the database connection
 $conn->close();
+
 ?>
