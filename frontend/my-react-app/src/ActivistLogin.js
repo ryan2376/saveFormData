@@ -32,7 +32,7 @@ const ActivistLogin = () => {
             if (response.ok) {
                 console.log('Activist login successful');
                 // Handle successful login, e.g., redirect to dashboard or set user context
-                 window.location.href = '/activist-dashboard'; // Adjust the redirection as needed
+                window.location.href = '/activist-dashboard'; // Adjust the redirection as needed
             } else {
                 const errorMessage = await response.text();
                 console.error(`Activist login failed: ${errorMessage}`);
