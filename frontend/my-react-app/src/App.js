@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Institution from './Institution'; 
+// import Institution from './Institution'; 
 import InstitutionSignUp from './InstitutionSignUp'; 
 import InstitutionLogin from './InstitutionLogin';
 import InstitutionDashboard from './InstitutionDashboard';
@@ -13,7 +13,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/institution" element={<Institution />} />
+        {/* <Route path="/institution" element={<Institution />} /> */}
         <Route path="/institution-sign-up" element={<InstitutionSignUp />} />
         <Route path="/institution-login" element={<InstitutionLogin />} />
         <Route path="/institution-dashboard" element={<InstitutionDashboard />} />

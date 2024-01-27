@@ -1,0 +1,50 @@
+.institution-container {
+    font-family: 'Arial', sans-serif;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #F5F5F5; /* Off-White */
+}
+
+.institution-header {
+color: #008080; /* Teal */
+text-align: center;
+}
+
+.institution-form, .login-form {
+background-color: white;
+padding: 20px;
+margin-top: 20px;
+border-radius: 5px;
+box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+label {
+display: block;
+margin-bottom: 10px;
+}
+
+input, textarea, button {
+width: 100%;
+padding: 10px;
+margin-top: 5px;
+margin-bottom: 20px;
+border-radius: 5px;
+border: 1px solid #ddd;
+}
+
+button {
+background-color: #008080; /* Teal */
+color: white;
+cursor: pointer;
+}
+
+button:hover {
+background-color: #FF7F50; /* Coral */
+}
+
+.error-message {
+color: #FF7F50; /* Coral */
+text-align: center;
+}
+  

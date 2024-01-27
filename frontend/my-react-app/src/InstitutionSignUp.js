@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Institution.css';
+import './InstitutionSignUPandLogin.css';
 
 const InstitutionSignUp = () => {
 const [institutionDetails, setInstitutionDetails] = useState({
