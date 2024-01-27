@@ -1,0 +1,94 @@
+/* ActivistDashboard.css */
+
+.activist-dashboard {
+    padding: 20px;
+    background-color: #F5F5F5; /* Off-White */
+    font-family: 'Arial', sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #008080; /* Teal */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.activist-profile {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.activist-profile h2 {
+    color: #008080; /* Teal */
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #008080; /* Teal */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #FF7F50; /* Coral */
+}
+
+/* Edit Button */
+button.edit-button {
+    background-color: #FF7F50; /* Coral */
+}
+
+button.edit-button:hover {
+    background-color: #FF6347; /* Tomato */
+}
+
+/* Cancel Button */
+button.cancel-button {
+    background-color: #999; /* Gray */
+}
+
+button.cancel-button:hover {
+    background-color: #777; /* Dark Gray */
+}
+
+.activist-profile div, .activist-profile form {
+    margin-top: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .activist-dashboard {
+        padding: 10px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
+        margin-bottom: 5px;
+    }
+
+    button {
+        padding: 8px 16px;
+    }
+}

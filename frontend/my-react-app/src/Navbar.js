@@ -23,8 +23,8 @@ return (
     <ul className={`nav-links ${isOpen ? "nav-active" : ""}`}>
     {/* Navigation Links */}
     <li><Link to="/" className="nav-item">Home</Link></li>
-    <li><Link to="/institution" className="nav-item">Institution</Link></li>
-    <li><Link to="/activist" className="nav-item">Activist</Link></li>
+    <li><Link to="/institution-login" className="nav-item">Institution</Link></li>
+    <li><Link to="/activist-login" className="nav-item">Activist</Link></li>
     {/* More links */}
     </ul>
 </nav>

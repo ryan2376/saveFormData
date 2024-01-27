@@ -1,5 +1,5 @@
 import React from 'react';
-import './Institution.css';
+import './InstitutionSignUpandLogin.css';
 
 const InstitutionDashboard = () => {
 return (

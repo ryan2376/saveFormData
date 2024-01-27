@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import InstitutionSignUp from './InstitutionSignUp'; 
 import InstitutionLogin from './InstitutionLogin';
 import InstitutionDashboard from './InstitutionDashboard';
+import ActivistSignUp from './ActivistSignUp';
+import ActivistLogin from './ActivistLogin';
+import ActivistDashboard from './ActivistDashboard';
 import Home from './Home';
 import NavBar from './Navbar';
 
@@ -17,6 +20,9 @@ function App() {
         <Route path="/institution-sign-up" element={<InstitutionSignUp />} />
         <Route path="/institution-login" element={<InstitutionLogin />} />
         <Route path="/institution-dashboard" element={<InstitutionDashboard />} />
+        <Route path="/activist-sign-up" element={<ActivistSignUp/>} />
+        <Route path="/activist-login" element={<ActivistLogin />} />
+        <Route path='/activist-dashboard' element={<ActivistDashboard/>} />
         {/* Add other routes as needed */}
       </Routes>
     </Router>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './InstitutionSignUpandLogin.css';
+import './ActivistSignUpandLogin.css';
 
-const InstitutionLogin = () => {
+const ActivistLogin = () => {
     const [loginDetails, setLoginDetails] = useState({
         username: '',
         password: '',
@@ -21,7 +21,7 @@ const InstitutionLogin = () => {
 
         try {
             // Send login details to the server for authentication
-            const response = await fetch('http://localhost/saveFormData/backend/institutionLogin.php', {
+            const response = await fetch('http://localhost/saveFormData/backend/activistLogin.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -29,35 +29,29 @@ const InstitutionLogin = () => {
                 body: JSON.stringify(loginDetails),
             });
 
-            console.log('Response status:', response.status); // Log the response status
-
             if (response.ok) {
-                console.log('Institution login successful');
-                // Redirect to the dashboard or perform other actions upon successful login
-                window.location.href = '/institution-dashboard'; // Change the path accordingly
+                console.log('Activist login successful');
+                // Handle successful login, e.g., redirect to dashboard or set user context
+                 window.location.href = '/activist-dashboard'; // Adjust the redirection as needed
             } else {
                 const errorMessage = await response.text();
-                console.error(`Institution login failed: ${errorMessage}`);
-                
-                // Set the error message for display
+                console.error(`Activist login failed: ${errorMessage}`);
                 setError('Incorrect username or password. Please try again.');
             }
         } catch (error) {
-            console.error('An error occurred during institution login:', error);
-            // Set the error message for display
+            console.error('An error occurred during activist login:', error);
             setError('An unexpected error occurred. Please try again later.');
         }
     };
 
     return (
-        <div className="institution-container">
-            <header className="institution-header">
-                <h1>Institution Login</h1>
+        <div className="activist-container">
+            <header className="activist-header">
+                <h1>Activist Login</h1>
             </header>
 
             <section className="login-form">
                 <form onSubmit={handleLoginSubmit}>
-                    {/* Include username and password fields for login */}
                     <label>
                         Username:
                         <input
@@ -87,4 +81,4 @@ const InstitutionLogin = () => {
     );
 };
 
-export default InstitutionLogin;
+export default ActivistLogin;
