@@ -1,0 +1,77 @@
+.institution-dashboard {
+background-color: #f0f8ff; /* Alice Blue background for a light feel */
+color: #008080; /* Teal color for text to match the navbar */
+padding: 20px;
+}
+
+.institution-dashboard h1 {
+color: #008080; /* Teal */
+text-align: center;
+}
+
+.form {
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+.form input, .form textarea, .form button {
+padding: 10px;
+border-radius: 5px;
+border: 1px solid #008080; /* Teal border */
+}
+
+.form input, .form textarea {
+background-color: #ffffff; /* White background */
+color: #008080; /* Teal text */
+}
+
+.form button {
+background-color: #008080; /* Teal */
+color: white;
+cursor: pointer;
+}
+
+.form button:hover {
+background-color: #FF7F50; /* Coral */
+}
+
+.activities-list {
+list-style: none;
+padding: 0;
+}
+
+.activities-list li {
+background-color: #ffffff; /* White background */
+color: #008080; /* Teal text */
+border: 1px solid #008080; /* Teal border */
+padding: 10px;
+margin-top: 10px;
+border-radius: 5px;
+}
+
+.activities-list li button {
+background-color: #FF7F50; /* Coral */
+color: white;
+border: none;
+padding: 5px 10px;
+margin-left: 10px;
+border-radius: 5px;
+cursor: pointer;
+}
+
+.activities-list li button:hover {
+background-color: #008080; /* Teal */
+}
+
+/* Styling for the Google Maps container */
+.map-container {
+width: '100%';
+height: '400px';
+margin-top: 20px;
+border-radius: 5px;
+box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Adds subtle shadow around the map for depth */
+border: 1px solid #008080; /* Teal border to match the navbar */
+}
+
+/* Adjust if necessary to fit your layout */

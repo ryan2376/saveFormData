@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import './InstitutionDashboard.css'
 import axios from 'axios';
+import { GoogleMap, Marker, LoadScript } from '@react-google-maps/api';
+
+
+const center = {
+    lat: -0.16653393748361453,
+    lng: 35.96483838928074
+};
 
 const InstitutionDashboard = () => {
 const [activities, setActivities] = useState([]);
@@ -59,7 +67,18 @@ return (
 </li>
 ))}
 </ul>
-
+    <LoadScript googleMapsApiKey="AIzaSyC2QjP--erdKRm6plfK_qkAim0n4twgCr8">
+    <div className="map-container">
+    <GoogleMap
+    mapContainerStyle={{ width: '100%', height: '400px' }}
+    center={center}
+    zoom={10}
+    >
+    {/* Optionally, place a Marker or use the location from your state */}
+    <Marker position={center} />
+    </GoogleMap>
+    </div>
+    </LoadScript>
 </div>
 );
 };
