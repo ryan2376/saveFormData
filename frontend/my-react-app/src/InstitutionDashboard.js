@@ -95,7 +95,7 @@ return (
     ))}
     </ul>
     {selectedLocation && (
-    <LoadScript googleMapsApiKey="AIzaSyC2QjP--erdKRm6plfK_qkAim0n4twgCr8">
+    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
         <div className="map-container">
         <GoogleMap
             mapContainerStyle={mapContainerStyle}
@@ -114,3 +114,4 @@ return (
 };
 
 export default InstitutionDashboard;
+
