@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import './InstitutionDashboard.css'
 import axios from 'axios';
 import { GoogleMap, Marker, LoadScript } from '@react-google-maps/api';
+import Autocomplete from 'react-google-autocomplete';
+import './InstitutionDashboard.css';
 
-
-const center = {
-    lat: -0.16653393748361453,
-    lng: 35.96483838928074
+const mapContainerStyle = {
+width: '100%',
+height: '400px'
 };
+
+// const center = {
+// lat: -0.16653393748361453,
+// lng: 35.96483838928074
+// };
 
 const InstitutionDashboard = () => {
 const [activities, setActivities] = useState([]);
 const [form, setForm] = useState({ id: null, name: '', description: '', location: '', date: '' });
+const [selectedLocation, setSelectedLocation] = useState(null);
 
 const fetchActivities = async () => {
 const response = await axios.get('http://localhost/saveFormData/backend/institutionDashboard.php');
@@ -39,6 +45,17 @@ setForm({ id: null, name: '', description: '', location: '', date: '' });
 fetchActivities();
 };
 
+const handlePlaceSelect = (place) => {
+const location = {
+    name: place.name,
+    address: place.formatted_address,
+    lat: place.geometry.location.lat(),
+    lng: place.geometry.location.lng()
+};
+setForm({ ...form, location });
+setSelectedLocation(place);
+};
+
 const handleEdit = (activity) => {
 setForm(activity);
 };
@@ -54,31 +71,44 @@ return (
     <form onSubmit={handleSubmit}>
     <input name="name" value={form.name} onChange={handleInputChange} placeholder="Activity Name" required />
     <textarea name="description" value={form.description} onChange={handleInputChange} placeholder="Description" required />
-    <input name="location" value={form.location} onChange={handleInputChange} placeholder="Location" required />
+    <Autocomplete
+        apiKey="AIzaSyC2QjP--erdKRm6plfK_qkAim0n4twgCr8"
+        onPlaceSelected={handlePlaceSelect}
+        options={{
+        types: ['geocode'],
+        fields: ['name', 'formatted_address', 'geometry.location'],
+        }}
+        defaultValue={form.location ? form.location.name : ''}
+        placeholder="Location"
+        required
+    />
     <input type="date" name="date" value={form.date} onChange={handleInputChange} required />
     <button type="submit">Submit</button>
     </form>
-    <ul>
+    <ul className="activities-list">
     {Array.isArray(activities) && activities.map(activity => (
-    <li key={activity.id}>
-    {activity.name} - {activity.date}
-    <button onClick={() => handleEdit(activity)}>Edit</button>
-    <button onClick={() => handleDelete(activity.id)}>Delete</button>
-</li>
-))}
-</ul>
+        <li key={activity.id}>
+        {activity.name} - {activity.date}
+        <button onClick={() => handleEdit(activity)}>Edit</button>
+        <button onClick={() => handleDelete(activity.id)}>Delete</button>
+        </li>
+    ))}
+    </ul>
+    {selectedLocation && (
     <LoadScript googleMapsApiKey="AIzaSyC2QjP--erdKRm6plfK_qkAim0n4twgCr8">
-    <div className="map-container">
-    <GoogleMap
-    mapContainerStyle={{ width: '100%', height: '400px' }}
-    center={center}
-    zoom={10}
-    >
-    {/* Optionally, place a Marker or use the location from your state */}
-    <Marker position={center} />
-    </GoogleMap>
-    </div>
+        <div className="map-container">
+        <GoogleMap
+            mapContainerStyle={mapContainerStyle}
+            center={{ lat: selectedLocation.geometry.location.lat(), lng: selectedLocation.geometry.location.lng() }}
+            zoom={10}
+        >
+            <Marker
+            position={{ lat: selectedLocation.geometry.location.lat(), lng: selectedLocation.geometry.location.lng() }}
+            />
+        </GoogleMap>
+        </div>
     </LoadScript>
+    )}
 </div>
 );
 };
