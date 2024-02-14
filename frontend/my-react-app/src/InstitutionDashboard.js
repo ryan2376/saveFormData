@@ -72,7 +72,7 @@ return (
     <input name="name" value={form.name} onChange={handleInputChange} placeholder="Activity Name" required />
     <textarea name="description" value={form.description} onChange={handleInputChange} placeholder="Description" required />
     <Autocomplete
-        apiKey="AIzaSyC2QjP--erdKRm6plfK_qkAim0n4twgCr8"
+        apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
         onPlaceSelected={handlePlaceSelect}
         options={{
         types: ['geocode'],

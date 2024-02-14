@@ -64,12 +64,12 @@ const handleQuerySubmit = async () => {
 const data = {
     prompt: userInput,
     max_tokens: 150,
-    temperature: 0.7,
-    model: "text-davinci-003" // or use "text-instruct-davinci-beta" for InstructGPT
+    temperature: 0.7
+    // model: "gpt-3.5-turbo-instruct" // or use "text-instruct-davinci-beta" for InstructGPT
 };
 
 try {
-    const response = await axios.post('https://api.openai.com/v1/engines/davinci/completions', data, {
+    const response = await axios.post('https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions', data, {
     headers: {
         'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`
     }
