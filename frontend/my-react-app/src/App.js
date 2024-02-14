@@ -9,7 +9,9 @@ import ActivistLogin from './ActivistLogin';
 import ActivistDashboard from './ActivistDashboard';
 import Home from './Home';
 import NavBar from './Navbar';
-import DebugComponent from './DebugComponent';
+import MapTest from './MapTest';
+
+// import DebugComponent from './DebugComponent';
 
 function App() {
   return (
@@ -24,7 +26,8 @@ function App() {
         <Route path="/activist-sign-up" element={<ActivistSignUp/>} />
         <Route path="/activist-login" element={<ActivistLogin />} />
         <Route path='/activist-dashboard' element={<ActivistDashboard/>} />
-        <Route path='/debug' element={<DebugComponent />} />
+        <Route path='/MapTest' element={<MapTest/>}/>
+        {/* <Route path='/debug' element={<DebugComponent />} /> */}
         {/* Add other routes as needed */}
       </Routes>
     </Router>

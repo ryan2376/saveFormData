@@ -9,10 +9,6 @@ width: '100%',
 height: '400px'
 };
 
-// const center = {
-// lat: -0.16653393748361453,
-// lng: 35.96483838928074
-// };
 
 const InstitutionDashboard = () => {
 const [activities, setActivities] = useState([]);
@@ -74,14 +70,11 @@ return (
     <Autocomplete
         apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
         onPlaceSelected={handlePlaceSelect}
-        options={{
-        types: ['geocode'],
-        fields: ['name', 'formatted_address', 'geometry.location'],
-        }}
-        defaultValue={form.location ? form.location.name : ''}
+        options={{ types: ['geocode'], fields: ['name', 'formatted_address', 'geometry.location'] }}
+        defaultValue={form.location}
         placeholder="Location"
         required
-    />
+        />
     <input type="date" name="date" value={form.date} onChange={handleInputChange} required />
     <button type="submit">Submit</button>
     </form>
@@ -95,7 +88,7 @@ return (
     ))}
     </ul>
     {selectedLocation && (
-    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
+        <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
         <div className="map-container">
         <GoogleMap
             mapContainerStyle={mapContainerStyle}
@@ -107,7 +100,7 @@ return (
             />
         </GoogleMap>
         </div>
-    </LoadScript>
+        </LoadScript>
     )}
 </div>
 );
