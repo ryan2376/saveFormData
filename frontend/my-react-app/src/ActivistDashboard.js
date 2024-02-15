@@ -122,7 +122,7 @@ return (
     {chatHistory.map((chat, index) => (
         <div key={index}>
         <p><strong>You:</strong> {chat.user}</p>
-        <p><strong>Bot:</strong> {chat.bot}</p>
+        <p><strong>Info AI:</strong> {chat.bot}</p>
         </div>
     ))}
     <input type="text" value={userInput} onChange={handleChatInputChange} />
