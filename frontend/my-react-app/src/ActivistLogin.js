@@ -10,17 +10,16 @@ const ActivistLogin = () => {
 
     const handleLoginInputChange = (e) => {
         const { name, value } = e.target;
-        setLoginDetails({
-            ...loginDetails,
+        setLoginDetails(prevDetails => ({
+            ...prevDetails,
             [name]: value,
-        });
+        }));
     };
 
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            // Send login details to the server for authentication
             const response = await fetch('http://localhost/saveFormData/backend/activistLogin.php', {
                 method: 'POST',
                 headers: {
@@ -29,17 +28,17 @@ const ActivistLogin = () => {
                 body: JSON.stringify(loginDetails),
             });
 
+            const data = await response.json();
+
             if (response.ok) {
-                console.log('Activist login successful');
-                // Handle successful login, e.g., redirect to dashboard or set user context
-                window.location.href = '/activist-dashboard'; // Adjust the redirection as needed
+                // Assuming data contains an 'activistId' property with the logged-in activist's ID
+                localStorage.setItem('activistId', data.activistId);
+                // Redirect to the dashboard
+                window.location.href = '/activist-dashboard';
             } else {
-                const errorMessage = await response.text();
-                console.error(`Activist login failed: ${errorMessage}`);
-                setError('Incorrect username or password. Please try again.');
+                setError(data.message || 'Incorrect username or password. Please try again.');
             }
         } catch (error) {
-            console.error('An error occurred during activist login:', error);
             setError('An unexpected error occurred. Please try again later.');
         }
     };
@@ -49,7 +48,6 @@ const ActivistLogin = () => {
             <header className="activist-header">
                 <h1>Activist Login</h1>
             </header>
-
             <section className="login-form">
                 <form onSubmit={handleLoginSubmit}>
                     <label>
@@ -59,9 +57,9 @@ const ActivistLogin = () => {
                             name="username"
                             value={loginDetails.username}
                             onChange={handleLoginInputChange}
+                            required
                         />
                     </label>
-
                     <label>
                         Password:
                         <input
@@ -69,11 +67,10 @@ const ActivistLogin = () => {
                             name="password"
                             value={loginDetails.password}
                             onChange={handleLoginInputChange}
+                            required
                         />
                     </label>
-
                     <button type="submit">Login</button>
-
                     {error && <p className="error-message">{error}</p>}
                 </form>
             </section>
