@@ -2,7 +2,6 @@
 // Include database connection
 include_once("db_connect.php");
 
-
 // CORS headers
 header("Access-Control-Allow-Origin: http://localhost:3000");
 header("Content-Type: application/json; charset=UTF-8");
@@ -22,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     }
     exit(0);
 }
+
 // Connect to the database
 // $conn assumed to be your database connection variable from "db_connect.php"
 
@@ -32,17 +32,32 @@ switch ($method) {
         // Assuming you're sending data as JSON in the body of the request
         $data = json_decode(file_get_contents("php://input"));
 
-        if (isset($data->id)) {
-            // This means we're updating an existing activity
-            $stmt = $conn->prepare("UPDATE activities SET name = ?, description = ?, location = ?, date = ? WHERE id = ?");
-            $stmt->bind_param("ssssi", $data->name, $data->description, $data->location, $data->date, $data->id);
-        } else {
-            // Inserting a new activity
-            $stmt = $conn->prepare("INSERT INTO activities (name, description, location, date) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $data->name, $data->description, $data->location, $data->date);
+        // Retrieve the institution_id from the decoded JSON data
+        $institutionId = $data->institution_id ?? '';
+
+        // Check if the institution_id is set
+        if (empty($institutionId)) {
+            // Return an error message if institution_id is not set
+            http_response_code(400);
+            echo json_encode(["error" => "Institution ID is required."]);
+            exit();
         }
+
+        // Inserting a new activity with the institution_id
+        $stmt = $conn->prepare("INSERT INTO activities (institution_id, name, description, location, date) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("issss", $institutionId, $data->name, $data->description, $data->location, $data->date);
         $stmt->execute();
-        echo json_encode(["message" => "Activity processed successfully."]);
+
+        // Check for errors
+        if ($stmt->error) {
+            // Return error message if there is an error in SQL query execution
+            http_response_code(500);
+            echo json_encode(["error" => "Error inserting activity: " . $stmt->error]);
+            exit();
+        }
+
+        // Return success message if insertion is successful
+        echo json_encode(["message" => "Activity inserted successfully."]);
         break;
     
     case 'GET':

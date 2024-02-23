@@ -18,9 +18,6 @@ if ($conn->connect_error) {
 }
 
 
-// Close the database connection
-$conn->close();
-
 ?>
 
 
