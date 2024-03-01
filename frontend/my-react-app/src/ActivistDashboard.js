@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import './ActivistDashboard.css';
 
 const ActivistDashboard = () => {
@@ -17,6 +18,11 @@ const ActivistDashboard = () => {
     // State for chatbot
     const [userInput, setUserInput] = useState('');
     const [chatHistory, setChatHistory] = useState([]);
+
+    // State for institution search
+    const [searchLocation, setSearchLocation] = useState('');
+    const [institutions, setInstitutions] = useState([]);
+    const [selectedInstitution, setSelectedInstitution] = useState(null);
 
     useEffect(() => {
         const activistId = localStorage.getItem('activistId');
@@ -44,10 +50,8 @@ const ActivistDashboard = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const url = `http://localhost/saveFormData/backend/activistDashboard.php${activistInfo.id ? `?id=${activistInfo.id}` : ''}`;
-        const method = activistInfo.id ? 'PUT' : 'POST';
-
         axios({
-            method: method,
+            method: activistInfo.id ? 'PUT' : 'POST',
             url: url,
             data: activistInfo,
             headers: {'Content-Type': 'application/json'}
@@ -72,7 +76,6 @@ const ActivistDashboard = () => {
             prompt: userInput,
             max_tokens: 150,
             temperature: 0.7
-            // model: "gpt-3.5-turbo-instruct" // Adjust according to the API documentation
         };
 
         try {
@@ -83,15 +86,25 @@ const ActivistDashboard = () => {
             });
 
             setChatHistory([...chatHistory, { user: userInput, bot: response.data.choices[0].text }]);
-            setUserInput(''); // Clear the input after sending
+            setUserInput('');
         } catch (error) {
             console.error('Error in sending message to OpenAI:', error);
+        }
+    };
+
+    const handleLocationSearch = async () => {
+        try {
+            const response = await axios.get(`http://localhost/api/searchInstitutions.php?location=${searchLocation}`);
+            setInstitutions(response.data);
+        } catch (error) {
+            console.error('Error fetching institutions:', error);
         }
     };
 
     return (
         <div className="activist-dashboard">
             <h1>Activist Dashboard</h1>
+
             {/* Profile Section */}
             <section className="activist-profile">
                 <h2>Profile</h2>
@@ -129,6 +142,47 @@ const ActivistDashboard = () => {
                 ))}
                 <input type="text" value={userInput} onChange={handleChatInputChange} placeholder="Ask a question" />
                 <button onClick={handleQuerySubmit}>Send</button>
+            </div>
+
+            {/* Institution Search */}
+            <div className="institution-search">
+                <input
+                    type="text"
+                    value={searchLocation}
+                    onChange={(e) => setSearchLocation(e.target.value)}
+                    placeholder="Enter location..."
+                />
+                <button onClick={handleLocationSearch}>Search</button>
+
+                <MapContainer center={[0, 0]} zoom={13}>
+                    <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                    {institutions.map((institution) => (
+                        <Marker
+                            key={institution.id}
+                            position={[institution.latitude, institution.longitude]}
+                            onClick={() => {
+                                setSelectedInstitution(institution);
+                            }}
+                        />
+                    ))}
+
+                    {selectedInstitution && (
+                        <Popup
+                            position={[
+                                selectedInstitution.latitude,
+                                selectedInstitution.longitude,
+                            ]}
+                            onClose={() => {
+                                setSelectedInstitution(null);
+                            }}
+                        >
+                            <div>
+                                <h2>{selectedInstitution.name}</h2>
+                                <p>{selectedInstitution.description}</p>
+                            </div>
+                        </Popup>
+                    )}
+                </MapContainer>
             </div>
         </div>
     );
