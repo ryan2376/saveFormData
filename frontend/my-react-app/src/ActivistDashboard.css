@@ -1,132 +1,138 @@
 /* ActivistDashboard.css */
 
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
 .activist-dashboard {
     padding: 20px;
-    background-color: #F5F5F5; /* Off-White */
+    background-color: #f7f7f7;
     font-family: 'Arial', sans-serif;
     max-width: 800px;
     margin: 0 auto;
     border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    color: #008080; /* Teal */
+    color: #008080;
     text-align: center;
     margin-bottom: 20px;
 }
 
+/* Profile Section */
 .activist-profile {
     margin-bottom: 20px;
     padding: 20px;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .activist-profile h2 {
-    color: #008080; /* Teal */
+    color: #008080;
     margin-bottom: 20px;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+.activist-profile form {
+    display: grid;
+    gap: 15px;
 }
 
-button {
-    background-color: #008080; /* Teal */
-    color: white;
-    padding: 10px 20px;
+.activist-profile input[type="text"],
+.activist-profile input[type="email"],
+.activist-profile input[type="tel"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.activist-profile button {
+    background-color: #008080;
+    color: #fff;
+    padding: 12px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #FF7F50; /* Coral */
+.activist-profile button:hover {
+    background-color: #006666;
 }
 
-/* Edit Button */
-button.edit-button {
-    background-color: #FF7F50; /* Coral */
-}
-
-button.edit-button:hover {
-    background-color: #FF6347; /* Tomato */
-}
-
-/* Cancel Button */
-button.cancel-button {
-    background-color: #999; /* Gray */
-}
-
-button.cancel-button:hover {
-    background-color: #777; /* Dark Gray */
-}
-
-.activist-profile div, .activist-profile form {
-    margin-top: 10px;
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .activist-dashboard {
-        padding: 10px;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"] {
-        margin-bottom: 5px;
-    }
-
-    button {
-        padding: 8px 16px;
-    }
-}
-
+/* Chatbot Container */
 .chatbot-container {
-    background-color: #f5f5f5; /* Off-White */
+    background-color: #f7f7f7;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 20px;
     margin-top: 20px;
 }
 
 .chatbot-container p {
-background-color: white;
-padding: 10px;
-border-radius: 5px;
-margin-bottom: 10px;
+    background-color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
 }
 
 .chatbot-container input[type="text"] {
-width: calc(100% - 20px);
-padding: 10px;
-margin-bottom: 10px;
-border: 1px solid #ddd;
-border-radius: 5px;
+    width: calc(100% - 24px);
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
 }
 
 .chatbot-container button {
-width: 100%;
-background-color: #008080; /* Teal */
-color: white;
-padding: 10px;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-transition: background-color 0.3s;
+    width: 100%;
+    background-color: #008080;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .chatbot-container button:hover {
-background-color: #FF7F50; /* Coral */
+    background-color: #006666;
+}
+
+/* Institution Search */
+.institution-search {
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.institution-search input[type="text"] {
+    width: calc(100% - 24px);
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.institution-search button {
+    width: 100%;
+    background-color: #008080;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.institution-search button:hover {
+    background-color: #006666;
 }

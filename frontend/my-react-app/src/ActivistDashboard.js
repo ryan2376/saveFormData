@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import './ActivistDashboard.css';
 
 const ActivistDashboard = () => {
@@ -22,7 +21,6 @@ const ActivistDashboard = () => {
     // State for institution search
     const [searchLocation, setSearchLocation] = useState('');
     const [institutions, setInstitutions] = useState([]);
-    const [selectedInstitution, setSelectedInstitution] = useState(null);
 
     useEffect(() => {
         const activistId = localStorage.getItem('activistId');
@@ -94,7 +92,7 @@ const ActivistDashboard = () => {
 
     const handleLocationSearch = async () => {
         try {
-            const response = await axios.get(`http://localhost/api/searchInstitutions.php?location=${searchLocation}`);
+            const response = await axios.get(`http://localhost/saveFormData/backend/searchInstitutions.php?location=${searchLocation}`);
             setInstitutions(response.data);
         } catch (error) {
             console.error('Error fetching institutions:', error);
@@ -154,38 +152,19 @@ const ActivistDashboard = () => {
                 />
                 <button onClick={handleLocationSearch}>Search</button>
 
-                <MapContainer center={[0, 0]} zoom={13}>
-                    <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                    {institutions.map((institution) => (
-                        <Marker
-                            key={institution.id}
-                            position={[institution.latitude, institution.longitude]}
-                            onClick={() => {
-                                setSelectedInstitution(institution);
-                            }}
-                        />
-                    ))}
-
-                    {selectedInstitution && (
-                        <Popup
-                            position={[
-                                selectedInstitution.latitude,
-                                selectedInstitution.longitude,
-                            ]}
-                            onClose={() => {
-                                setSelectedInstitution(null);
-                            }}
-                        >
-                            <div>
-                                <h2>{selectedInstitution.name}</h2>
-                                <p>{selectedInstitution.description}</p>
-                            </div>
-                        </Popup>
-                    )}
-                </MapContainer>
+                {/* Display institutions */}
+                <div className="institutions-list">
+                    <h3>Institutions</h3>
+                    <ul>
+                        {institutions.map((institution) => (
+                            <li key={institution.id}>{institution.name}</li>
+                        ))}
+                    </ul>
+                </div>
             </div>
         </div>
     );
 };
 
 export default ActivistDashboard;
+
