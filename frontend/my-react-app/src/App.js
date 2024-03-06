@@ -8,7 +8,7 @@ import ActivistSignUp from './ActivistSignUp';
 import ActivistLogin from './ActivistLogin';
 import ActivistDashboard from './ActivistDashboard';
 import Home from './Home';
-import NavBar from './Navbar';
+import MyNavbar from './MyNavbar';
 import MapTest from './MapTest';
 
 // import DebugComponent from './DebugComponent';
@@ -16,7 +16,7 @@ import MapTest from './MapTest';
 function App() {
   return (
     <Router>
-      <NavBar />
+      <MyNavbar />
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/institution" element={<Institution />} /> */}
