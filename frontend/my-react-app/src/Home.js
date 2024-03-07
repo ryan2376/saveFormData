@@ -1,27 +1,52 @@
 import React from 'react';
-import './Home.css';
+import heroImage from './images/david-bruyndonckx-F_hft1Wiyj8-unsplash.jpg';
+import projectImage from './images/kazuend-19SC2oaVZW0-unsplash.jpg';
+import institutionImage from './images/imat-bagja-gumilar-jwTvCQQJXh0-unsplash.jpg';
+import differenceImage from './images/michael-krahn-eGD69I3ODC4-unsplash.jpg';
 
 const Home = () => {
     return (
         <div className="home-container">
-            <section className="hero-section">
-                <h1>Welcome to Activist Connect</h1>
-                <p>Connecting activists with institutions for a greener world.</p>
-                <button className="cta-button">Get Started</button>
+            <section className="bg-white dark:bg-gray-900">
+                <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+                    <div className="mr-auto place-self-center lg:col-span-7">
+                        <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">WELCOME TO ACTIVIST CONNECT</h1>
+                        <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400 text-center">Connecting activists with institutions for a greener world.</p>
+                        
+            
+                    </div>
+                    <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
+                    <img src={heroImage} alt="Hero" />
+                    </div>                
+                </div>
             </section>
-
-            <section className="features-section">
-                <div className="feature feature1" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1532511581225-3a3f3c532a24)'}}>
-                    <h2>Discover Projects</h2>
-                    <p>Find local environmental projects and participate in activities that matter.</p>
+            <section className="bg-white dark:bg-gray-900">
+                <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+                <div className="mr-auto flex flex-col justify-center lg:col-span-7">
+                    <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white text-center">JOIN OTHER ENVIRONMENT LOVERS IN THE JOURNEY TO A GREENER WORLD</h1>
+                        <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400 text-center">Connecting activists with institutions for a greener world.</p>
+                        <a href="/activist-sign-up" className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-teal-500 hover:bg-teal-600 focus:outline-none focus:bg-teal-600 dark:focus:ring-teal-300">
+                            Activist Sign Up
+                        </a>  
+                    </div>
+                    <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
+                    <img src={projectImage} alt="Project" />
+                    </div>                
                 </div>
-                <div className="feature feature2" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1517089949002-99a24e5f42a9)'}}>
-                    <h2>Connect with Institutions</h2>
-                    <p>Build partnerships with institutions to amplify your environmental impact.</p>
-                </div>
-                <div className="feature feature3" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1468824350952-04a07e34b7a2)'}}>
-                    <h2>Make a Difference</h2>
-                    <p>Join a community dedicated to making positive changes for our planet.</p>
+            </section>
+            <section className="bg-white dark:bg-gray-900">
+                <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+                <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
+                <img src={institutionImage} alt="Institution" />
+                    </div>
+                    <div className="mr-auto flex flex-col justify-center lg:col-span-7">
+                    <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white text-center">Join a community dedicated to making positive changes for our planet</h1>
+                        <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400 text-center">Connecting activists with institutions for a greener world.</p>
+                        <a href="/institution-sign-up" className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-teal-500 hover:bg-teal-600 focus:outline-none focus:bg-teal-600 dark:focus:ring-teal-300">
+                            Institution Sign Up
+                        </a>  
+                    </div>
+                                    
                 </div>
             </section>
 
