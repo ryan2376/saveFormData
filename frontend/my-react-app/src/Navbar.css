@@ -1,54 +1,73 @@
-.navbar {
-    background-color: #008080; /* Teal */
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 20px;
-    align-items: center;
-}
-
-.navbar-brand {
-font-weight: bold;
-}
-
 .nav-links {
-list-style: none;
-display: flex;
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
 }
 
 .nav-item {
-margin-left: 20px;
-text-decoration: none;
-color: white;
+    margin-left: 20px;
 }
 
-.nav-item:hover {
-color: #FF7F50; /* Coral */
+.nav-link {
+    font-weight: bold;
+    color: white; /* Set the default color */
+    text-decoration: none; /* Remove default underline */
+    padding: 10px 15px; /* Add padding to make them look like buttons */
+    background-color: #008080; /* Set background color to teal */
+    border-radius: 5px; /* Add border-radius for rounded corners */
+    transition: background-color 0.3s ease; /* Add transition for smooth color change */
 }
 
+.nav-link:hover {
+    background-color: #05a2a2; /* Change background color to a lighter teal on hover */
+    text-decoration: none; /* Remove underline on hover */
+}
+
+/* Hide toggle button by default */
 .nav-toggle {
-display: none;
-}
-
-@media (max-width: 768px) {
-.nav-links {
     display: none;
 }
 
-.nav-toggle {
-    display: block;
-    background: none;
-    border: none;
-    color: white;
-}
+/* Styles for toggle button and menu on small screens */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px; /* Adjust as needed based on your navbar height */
+        right: 0;
+        background-color: #008080;
+        width: 100%;
+        padding: 10px 0;
+    }
 
-.bar {
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px auto;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    background-color: white;
-}
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-toggle {
+        display: block;
+        background: none;
+        border: none;
+        color: black;
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        z-index: 1000; /* Ensure it's on top of other elements */
+        font-size: 1.5rem; /* Adjust the font size */
+        cursor: pointer; /* Add cursor pointer */
+    }
+
+    .bar {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        background-color: black;
+    }
 }
