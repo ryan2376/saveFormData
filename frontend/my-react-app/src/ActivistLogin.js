@@ -70,7 +70,7 @@ const ActivistLogin = () => {
                             required
                         />
                     </label>
-                    <button type="submit">Login</button>
+                    <button type="submit" className='login-button'>Login</button>
                     {error && <p className="error-message">{error}</p>}
                 </form>
             </section>

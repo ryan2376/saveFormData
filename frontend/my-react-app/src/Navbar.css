@@ -22,7 +22,7 @@
 }
 
 .nav-link:hover {
-    background-color: #05a2a2; /* Change background color to a lighter teal on hover */
+    background-color: coral; /* Change background color to a lighter teal on hover */
     text-decoration: none; /* Remove underline on hover */
 }
 

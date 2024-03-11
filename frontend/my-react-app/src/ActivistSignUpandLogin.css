@@ -12,7 +12,7 @@
 }
 
 .form-section {
-    background-color: white;
+    /* background-color: white; */
     padding: 20px;
     margin-top: 20px;
     border-radius: 5px;
@@ -34,13 +34,16 @@ input, textarea, button {
 }
 
 button {
-    background-color: #008080; /* Teal */
-    color: 008080;
+    background-color: coral; /* Teal */
     cursor: pointer;
 }
 
+button ,login-button{
+    color: #008080;
+}
+
 button:hover {
-    background-color: #FF7F50; /* Coral */
+    background-color: coral /* Coral */
 }
 
 .error-message {
