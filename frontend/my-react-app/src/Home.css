@@ -1,64 +1,57 @@
 .home-container {
     font-family: 'Arial', sans-serif;
-    background-color: #F5F5F5; /* Off-White */
+    position: relative;
 }
 
 .hero-section {
-background-color: #008080; /* Teal */
-color: white;
-padding: 50px 20px;
-text-align: center;
+    background-color: #008080; /* Teal */
+    color: white;
+    padding: 50px 20px;
 }
 
-.cta-button {
-background-color: #FF7F50; /* Coral */
-color: white;
-border: none;
-padding: 10px 20px;
-border-radius: 5px;
-cursor: pointer;
-transition: background-color 0.3s;
+.signup-section {
+    background-color: #ffffff; /* White */
+    color: #333; /* Dark gray */
+    padding: 50px 20px;
 }
 
-.cta-button:hover {
-background-color: darken(#FF7F50, 10%);
+.institution-section {
+    background-color: #008080; /* Teal */
+    color: white;
+    padding: 50px 20px;
 }
 
-.features-section {
-display: flex;
-justify-content: space-around;
-padding: 20px;
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #0099ff; /* Blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.feature {
-background-color: #F5F5F5; /* Light background for contrast */
-padding: 20px;
-border-radius: 5px;
-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-width: 30%;
-text-align: center;
-}
-
-.feature h2 {
-color: #008080; /* Teal */
-}
-
-@media (max-width: 768px) {
-.features-section {
-    flex-direction: column;
-    align-items: center;
-}
-
-.feature {
-    width: 80%;
-    margin-bottom: 20px;
-}
+.btn:hover {
+    background-color: #0077cc; /* Darker blue on hover */
 }
 
 .wave-container {
     position: absolute;
     bottom: 0;
     width: 100%;
-    z-index: -1; /* Ensure it stays behind other content */
-    background-color: #ffffff; /* Adjust to match your background color */
+    z-index: -1;
+}
+
+@media (max-width: 768px) {
+    .features-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature {
+        width: 80%;
+        margin-bottom: 20px;
+    }
 }
