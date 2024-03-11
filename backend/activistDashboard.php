@@ -1,5 +1,5 @@
 <?php
-include_once("db_connect.php"); // Ensure this points to your actual DB connection script
+include_once("db_connect.php");
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");

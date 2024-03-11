@@ -1,6 +1,20 @@
+// ActivistDashboard.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import './ActivistDashboard.css';
+
+const mapContainerStyle = {
+    width: '100%',
+    height: '300px',
+    borderRadius: '8px',
+    marginTop: '20px',
+};
+
+const center = {
+    lat: 0, // Set the default latitude
+    lng: 0, // Set the default longitude
+};
 
 const ActivistDashboard = () => {
     const [activistInfo, setActivistInfo] = useState({
@@ -10,7 +24,7 @@ const ActivistDashboard = () => {
         email: '',
         phoneNumber: '',
         location: '',
-        interests: ''
+        interests: '',
     });
     const [isEditing, setIsEditing] = useState(false);
 
@@ -21,6 +35,9 @@ const ActivistDashboard = () => {
     // State for institution search
     const [searchLocation, setSearchLocation] = useState('');
     const [institutions, setInstitutions] = useState([]);
+
+    // State for selected institution location
+    const [selectedInstitution, setSelectedInstitution] = useState(null);
 
     useEffect(() => {
         const activistId = localStorage.getItem('activistId');
@@ -37,7 +54,7 @@ const ActivistDashboard = () => {
         const { name, value } = e.target;
         setActivistInfo({
             ...activistInfo,
-            [name]: value
+            [name]: value,
         });
     };
 
@@ -48,20 +65,22 @@ const ActivistDashboard = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const url = `http://localhost/saveFormData/backend/activistDashboard.php${activistInfo.id ? `?id=${activistInfo.id}` : ''}`;
-        axios({
-            method: activistInfo.id ? 'PUT' : 'POST',
-            url: url,
-            data: activistInfo,
-            headers: {'Content-Type': 'application/json'}
-        })
-            .then(response => {
-                if (!activistInfo.id) {
-                    localStorage.setItem('activistId', response.data.id);
-                }
-                setIsEditing(false);
-                alert('Profile updated successfully');
-            })
-            .catch(error => console.error('Error updating profile:', error));
+        try {
+            const response = await axios({
+                method: activistInfo.id ? 'PUT' : 'POST',
+                url: url,
+                data: activistInfo,
+                headers: { 'Content-Type': 'application/json' },
+            });
+
+            if (!activistInfo.id) {
+                localStorage.setItem('activistId', response.data.id);
+            }
+            setIsEditing(false);
+            alert('Profile updated successfully');
+        } catch (error) {
+            console.error('Error updating profile:', error);
+        }
     };
 
     // Chatbot functionality
@@ -73,14 +92,14 @@ const ActivistDashboard = () => {
         const data = {
             prompt: userInput,
             max_tokens: 150,
-            temperature: 0.7
+            temperature: 0.7,
         };
 
         try {
             const response = await axios.post('https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions', data, {
                 headers: {
-                    'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`
-                }
+                    'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+                },
             });
 
             setChatHistory([...chatHistory, { user: userInput, bot: response.data.choices[0].text }]);
@@ -97,6 +116,12 @@ const ActivistDashboard = () => {
         } catch (error) {
             console.error('Error fetching institutions:', error);
         }
+    };
+
+    const handleLocationClick = (location) => {
+        setSelectedInstitution(location);
+        // Open Google Maps in a new tab with the selected location
+        window.open(`https://www.google.com/maps/search/?api=1&query=${location.latitude},${location.longitude}`);
     };
 
     return (
@@ -157,14 +182,36 @@ const ActivistDashboard = () => {
                     <h3>Institutions</h3>
                     <ul>
                         {institutions.map((institution) => (
-                            <li key={institution.id}>{institution.name}</li>
+                            <li key={institution.id} onClick={() => handleLocationClick(institution)}>
+                                {institution.name}
+                            </li>
                         ))}
                     </ul>
                 </div>
             </div>
+
+            {/* Google Map */}
+            <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
+                <GoogleMap
+                    mapContainerStyle={mapContainerStyle}
+                    center={selectedInstitution ? {
+                        lat: selectedInstitution.latitude,
+                        lng: selectedInstitution.longitude,
+                    } : center}
+                    zoom={14}
+                >
+                    {selectedInstitution && (
+                        <Marker
+                            position={{
+                                lat: selectedInstitution.latitude,
+                                lng: selectedInstitution.longitude,
+                            }}
+                        />
+                    )}
+                </GoogleMap>
+            </LoadScript>
         </div>
     );
 };
 
 export default ActivistDashboard;
-

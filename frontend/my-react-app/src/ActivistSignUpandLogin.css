@@ -35,7 +35,7 @@ input, textarea, button {
 
 button {
     background-color: #008080; /* Teal */
-    color: white;
+    color: 008080;
     cursor: pointer;
 }
 
