@@ -12,8 +12,8 @@ const MyNavbar = () => {
 
     return (
         <FlowbiteNavbar fluid rounded>
-            <FlowbiteNavbar.Brand href="https://flowbite-react.com">
-                <img src="favicon.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" /> 
+            <FlowbiteNavbar.Brand href='./'>
+                <img src="favicon.svg" className="mr-3 ml-5 h-6 sm:h-9" alt="Flowbite React Logo" /> 
                 <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Activist Connect</span>
             </FlowbiteNavbar.Brand>
             <FlowbiteNavbar.Collapse className={isOpen ? 'nav-links open' : 'nav-links'}>
