@@ -54,3 +54,11 @@ color: #008080; /* Teal */
     margin-bottom: 20px;
 }
 }
+
+.wave-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: -1; /* Ensure it stays behind other content */
+    background-color: #ffffff; /* Adjust to match your background color */
+}
