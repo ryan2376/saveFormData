@@ -33,13 +33,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = $json_obj["username"];
     $password = $json_obj["password"];
 
+    // Additional parameters for latitude and longitude
+    $latitude = $json_obj["latitude"];
+    $longitude = $json_obj["longitude"];
+
     // Hash the password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Prepare and bind
-    $stmt = $conn->prepare("INSERT INTO institutions (name, location, activities, contact_person, contact_email, contact_phone, username, password) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssss", $name, $location, $activities, $contactPerson, $contactEmail, $contactPhone, $username, $hashedPassword);
+    $stmt = $conn->prepare("INSERT INTO institutions (name, location, activities, contact_person, contact_email, contact_phone, username, password, latitude, longitude) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssssssdd", $name, $location, $activities, $contactPerson, $contactEmail, $contactPhone, $username, $hashedPassword, $latitude, $longitude);
 
     // Execute the statement
     if ($stmt->execute()) {

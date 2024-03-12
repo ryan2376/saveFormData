@@ -1,4 +1,3 @@
-// ActivistDashboard.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
@@ -11,9 +10,9 @@ const mapContainerStyle = {
     marginTop: '20px',
 };
 
-const center = {
-    lat: 0, // Set the default latitude
-    lng: 0, // Set the default longitude
+const defaultCenter = {
+    lat: -0.1688,
+    lng: 35.9651,
 };
 
 const ActivistDashboard = () => {
@@ -120,8 +119,15 @@ const ActivistDashboard = () => {
 
     const handleLocationClick = (location) => {
         setSelectedInstitution(location);
-        // Open Google Maps in a new tab with the selected location
-        window.open(`https://www.google.com/maps/search/?api=1&query=${location.latitude},${location.longitude}`);
+        console.log('Selected Institution:', location);
+    };
+
+    // Handle click on the map to open Google Maps
+    const handleMapClick = (e) => {
+        const lat = e.latLng.lat();
+        const lng = e.latLng.lng();
+        const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+        window.open(googleMapsUrl, '_blank');
     };
 
     return (
@@ -194,17 +200,16 @@ const ActivistDashboard = () => {
             <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
                 <GoogleMap
                     mapContainerStyle={mapContainerStyle}
-                    center={selectedInstitution ? {
-                        lat: selectedInstitution.latitude,
-                        lng: selectedInstitution.longitude,
-                    } : center}
+                    center={selectedInstitution ? { lat: parseFloat(selectedInstitution.latitude), lng: parseFloat(selectedInstitution.longitude) } : defaultCenter}
                     zoom={14}
+                    onClick={handleMapClick} // Added onClick event listener for map click
                 >
+                    {/* Marker for selected institution */}
                     {selectedInstitution && (
                         <Marker
                             position={{
-                                lat: selectedInstitution.latitude,
-                                lng: selectedInstitution.longitude,
+                                lat: parseFloat(selectedInstitution.latitude),
+                                lng: parseFloat(selectedInstitution.longitude),
                             }}
                         />
                     )}

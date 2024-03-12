@@ -2,7 +2,7 @@ import React from 'react';
 import heroImage from './images/david-bruyndonckx-F_hft1Wiyj8-unsplash.jpg';
 import projectImage from './images/kazuend-19SC2oaVZW0-unsplash.jpg';
 import institutionImage from './images/imat-bagja-gumilar-jwTvCQQJXh0-unsplash.jpg';
-import differenceImage from './images/michael-krahn-eGD69I3ODC4-unsplash.jpg';
+// import differenceImage from './images/michael-krahn-eGD69I3ODC4-unsplash.jpg';
 
 const Home = () => {
     return (
