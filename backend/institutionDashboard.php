@@ -61,31 +61,108 @@ switch ($method) {
         break;
     
     case 'GET':
-        // Fetch all activities
-        $result = $conn->query("SELECT * FROM activities");
-        $activities = [];
-        while ($row = $result->fetch_assoc()) {
-            $activities[] = $row;
+        // Fetch institution details
+        $institutionId = $_GET['institution_id'] ?? '';
+        if (!empty($institutionId)) {
+            $stmt = $conn->prepare("SELECT * FROM institutions WHERE id = ?");
+            $stmt->bind_param("i", $institutionId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $institution = $result->fetch_assoc();
+
+            // Check if institution exists
+            if (!$institution) {
+                http_response_code(404);
+                echo json_encode(["error" => "Institution not found."]);
+                exit();
+            }
+
+            // Fetch all activities for the specific institution
+            $stmt = $conn->prepare("SELECT * FROM activities WHERE institution_id = ?");
+            $stmt->bind_param("i", $institutionId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $activities = $result->fetch_all(MYSQLI_ASSOC);
+
+            // Combine institution details and activities into a single JSON response
+            $response = [
+                "institution" => $institution,
+                "activities" => $activities
+            ];
+            echo json_encode($response);
+        } else {
+            http_response_code(400);
+            echo json_encode(["error" => "Institution ID is required."]);
         }
-        echo json_encode($activities);
         break;
     
-    case 'DELETE':
-        // Extracting id from URL
-        $id = $_GET['id'] ?? '';
-        $stmt = $conn->prepare("DELETE FROM activities WHERE id = ?");
-        $stmt->bind_param("i", $id);
+    case 'PUT':
+        // Assuming you're sending data as JSON in the body of the request
+        $data = json_decode(file_get_contents("php://input"));
+
+        // Retrieve the activity ID from the decoded JSON data
+        $activityId = $data->id ?? '';
+
+        // Check if the activity ID is set
+        if (empty($activityId)) {
+            // Return an error message if activity ID is not set
+            http_response_code(400);
+            echo json_encode(["error" => "Activity ID is required."]);
+            exit();
+        }
+
+         // Update the activity with the provided ID
+        $stmt = $conn->prepare("UPDATE activities SET name = ?, description = ?, location = ?, date = ? WHERE id = ?");
+        $stmt->bind_param("ssssi", $data->name, $data->description, $data->location, $data->date, $activityId);
         $stmt->execute();
-        echo json_encode(["message" => "Activity deleted successfully."]);
-        break;
 
-    // Add more cases as needed
+        // Check for errors
+        if ($stmt->error) {
+            // Return error message if there is an error in
+        // SQL query execution
+        http_response_code(500);
+        echo json_encode(["error" => "Error updating activity: " . $stmt->error]);
+        exit();
+    }
 
-    default:
-        // Method not supported
-        http_response_code(405);
-        echo json_encode(["error" => "Method not allowed"]);
-        break;
+    // Return success message if update is successful
+    echo json_encode(["message" => "Activity updated successfully."]);
+    break;
+
+case 'DELETE':
+    // Extracting id from URL
+    $id = $_GET['id'] ?? '';
+    if (empty($id)) {
+        // Return an error message if activity ID is not set
+        http_response_code(400);
+        echo json_encode(["error" => "Activity ID is required."]);
+        exit();
+    }
+
+    // Delete the activity with the provided ID
+    $stmt = $conn->prepare("DELETE FROM activities WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+
+    // Check for errors
+    if ($stmt->error) {
+        // Return error message if there is an error in SQL query execution
+        http_response_code(500);
+        echo json_encode(["error" => "Error deleting activity: " . $stmt->error]);
+        exit();
+    }
+
+    // Return success message if deletion is successful
+    echo json_encode(["message" => "Activity deleted successfully."]);
+    break;
+
+// Add more cases as needed
+
+default:
+    // Method not supported
+    http_response_code(405);
+    echo json_encode(["error" => "Method not allowed"]);
+    break;
 }
 
 // Close connection

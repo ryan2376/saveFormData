@@ -3,75 +3,89 @@ import axios from 'axios';
 import './InstitutionDashboard.css';
 
 const InstitutionDashboard = () => {
+    const [institution, setInstitution] = useState({});
     const [activities, setActivities] = useState([]);
-    const [form, setForm] = useState({
-        id: null,
-        name: '',
-        description: '',
-        location: '',
-        date: '',
-    });
-
-    // Function to fetch activities
-    const fetchActivities = async () => {
-        const response = await axios.get('http://localhost/saveFormData/backend/institutionDashboard.php');
-        setActivities(response.data);
-    };
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetchActivities();
+        fetchInstitutionDetails();
     }, []);
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setForm({
-            ...form,
-            [name]: value,
-        });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const institutionId = localStorage.getItem('institutionId'); // Retrieve the institution_id from local storage
-        const formData = {
-            ...form,
-            institution_id: institutionId, // Ensure this matches the expected field in your PHP
-        };
-        const url = 'http://localhost/saveFormData/backend/institutionDashboard.php';
-        if (form.id) {
-            await axios.post(`${url}?id=${form.id}`, formData);
-        } else {
-            await axios.post(url, formData);
+    const fetchInstitutionDetails = async () => {
+        setLoading(true);
+        try {
+            const institutionId = localStorage.getItem('institutionId');
+            const response = await axios.get(`http://localhost/saveFormData/backend/institutionDashboard.php?institution_id=${institutionId}`);
+            setInstitution(response.data.institution);
+            setActivities(response.data.activities);
+        } catch (error) {
+            setError('Failed to fetch institution details');
+        } finally {
+            setLoading(false);
         }
-        setForm({ id: null, name: '', description: '', location: '', date: '' }); // Reset form
-        fetchActivities(); // Refresh activities list
     };
 
-    // Function to handle activity deletion
-    const handleDelete = async (id) => {
-        await axios.delete(`http://localhost/saveFormData/backend/institutionDashboard.php?id=${id}`);
-        fetchActivities(); // Refresh the list after deletion
+    const handleEditInstitution = async (field, value) => {
+        setLoading(true);
+        try {
+            const institutionId = localStorage.getItem('institutionId');
+            const formData = {
+                institution_id: institutionId,
+                [field]: value,
+            };
+            await axios.put(`http://localhost/saveFormData/backend/institutionDashboard.php?id=${institutionId}`, formData);
+            fetchInstitutionDetails();
+        } catch (error) {
+            setError('Failed to update institution details');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleDeleteActivity = async (id) => {
+        if (window.confirm('Are you sure you want to delete this activity?')) {
+            setLoading(true);
+            try {
+                await axios.delete(`http://localhost/saveFormData/backend/institutionDashboard.php?id=${id}`);
+                fetchInstitutionDetails();
+            } catch (error) {
+                setError('Failed to delete activity');
+            } finally {
+                setLoading(false);
+            }
+        }
     };
 
     return (
         <div className="institution-dashboard">
-            <h1>Institution Dashboard</h1>
-            <form onSubmit={handleSubmit}>
-                <input name="name" value={form.name} onChange={handleInputChange} placeholder="Activity Name" required />
-                <textarea name="description" value={form.description} onChange={handleInputChange} placeholder="Description" required />
-                <input type="text" name="location" value={form.location} onChange={handleInputChange} placeholder="Location" required />
-                <input type="date" name="date" value={form.date} onChange={handleInputChange} required />
-                <button type="submit">Submit</button>
-            </form>
-            <ul className="activities-list">
-                {activities.map((activity) => (
-                    <li key={activity.id}>
-                        {activity.name} - {activity.date}
-                        <button onClick={() => setForm({ ...activity })}>Edit</button>
-                        <button onClick={() => handleDelete(activity.id)}>Delete</button>
-                    </li>
-                ))}
-            </ul>
+            <h1>Welcome, {institution.name}</h1>
+            <h2>Institution Details</h2>
+            <p>
+                Contact Person: <input type="text" value={institution.contact_person} onChange={(e) => handleEditInstitution('contact_person', e.target.value)} />
+            </p>
+            <p>
+                Email: <input type="text" value={institution.contact_email} onChange={(e) => handleEditInstitution('contact_email', e.target.value)} />
+            </p>
+            <p>
+                Phone: <input type="text" value={institution.contact_phone} onChange={(e) => handleEditInstitution('contact_phone', e.target.value)} />
+            </p>
+
+            <h2>Activities</h2>
+            {loading ? (
+                <p>Loading...</p>
+            ) : error ? (
+                <p>{error}</p>
+            ) : (
+                <ul className="activities-list">
+                    {activities.map((activity) => (
+                        <li key={activity.id}>
+                            {activity.name} - {activity.date}
+                            <button onClick={() => handleDeleteActivity(activity.id)}>Delete</button>
+                        </li>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 };
